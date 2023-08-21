@@ -37,6 +37,19 @@ Finished release target(s) in 10 seconds
 scarb test
 ```
 
+### Deploiement
+
+```bash
+pip install -r requirements.txt
+```
+
+To use invoke do not forget to set the address of the account in .env!
+
+```bash
+python3 scripts/deploy.py 
+python3 scripts/invoke.py 
+```
+
 ## Security
 
 > ⚠️ Warning! ⚠️
@@ -44,7 +57,7 @@ scarb test
 
 ## License
 
-Contracts for Cairo is released under the [MIT License](LICENSE).
+Contracts are released under the [MIT License](LICENSE).
 
 ## Special thanks to OpenZeppelin
 
