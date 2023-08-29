@@ -55,18 +55,18 @@ mod StarkSigner {
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        OwnerAdded: OwnerAdded,
-        OwnerRemoved: OwnerRemoved,
+        PubKeyAdded: PubKeyAdded,
+        PubKeyRemoved: PubKeyRemoved,
     }
 
     #[derive(Drop, starknet::Event)]
-    struct OwnerAdded {
-        new_owner_guid: felt252
+    struct PubKeyAdded {
+        new_pubkey: felt252
     }
 
     #[derive(Drop, starknet::Event)]
-    struct OwnerRemoved {
-        removed_owner_guid: felt252
+    struct PubKeyRemoved {
+        removed_pubkey: felt252
     }
 
 
@@ -98,6 +98,7 @@ mod StarkSigner {
         assert(self.StarkSigner_public_key.read() == 0, 'already initialized');
         assert(calldata.len() == 1, 'initialize failed');
         self.StarkSigner_public_key.write(*calldata.at(0));
+        self.emit(PubKeyAdded { new_pubkey: *calldata.at(0) });
     }
 
     #[external(v0)]
@@ -106,12 +107,14 @@ mod StarkSigner {
         calldata: Span<felt252>
     ) {
         assert(calldata.len() == 1, 'pubkey len invalid');
+        self.emit(PubKeyRemoved { removed_pubkey: self.StarkSigner_public_key.read() });
         self.StarkSigner_public_key.write(*calldata.at(0));
+        self.emit(PubKeyAdded { new_pubkey: *calldata.at(0) });
     }
 
     #[external(v0)]
     fn get_public_key(
-        ref self: ContractState
+        self: @ContractState
     ) -> Span<felt252> {
         let mut res = ArrayTrait::new();
         res.append(self.StarkSigner_public_key.read());

@@ -83,6 +83,7 @@ DEPLOYMENTS_DIR.mkdir(exist_ok=True, parents=True)
 COMPILED_CONTRACTS = [
     {"contract_name": "ledgerCairoContract_StarkSigner", "is_account_contract": False},
     {"contract_name": "ledgerCairoContract_AccountPlugin", "is_account_contract": True},
+    {"contract_name": "ledgerCairoContract_Controller", "is_account_contract": False},
     # {"contract_name": "referral_Naming", "is_account_contract": False}, // uncomment to test on devnet
 ]
 

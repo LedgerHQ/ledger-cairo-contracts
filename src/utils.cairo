@@ -5,6 +5,7 @@ mod constants;
 mod selectors;
 mod serde;
 mod unwrap_and_cast;
+mod storeSecp256r1Point;
 
 use array::ArrayTrait;
 use array::SpanTrait;
@@ -15,6 +16,7 @@ use starknet::SyscallResult;
 use starknet::SyscallResultTrait;
 use starknet::call_contract_syscall;
 use unwrap_and_cast::UnwrapAndCast;
+use storeSecp256r1Point::StoreSecp256r1Point;
 
 fn try_selector_with_fallback(
     target: ContractAddress, snake_selector: felt252, camel_selector: felt252, args: Span<felt252>

@@ -1,6 +1,7 @@
 mod account_plugin;
 mod interface;
 mod starkSigner;
+mod controller;
 
 use account_plugin::AccountPlugin;
 use starkSigner::StarkSigner;
